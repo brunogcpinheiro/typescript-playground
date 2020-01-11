@@ -7,6 +7,7 @@ interface User {
   location: string;
   bio: string;
   public_repos: number;
+  login: string;
 }
 
 const App: React.FC = () => {
@@ -14,10 +15,13 @@ const App: React.FC = () => {
   const [user, setUser] = useState<User>();
 
   async function fetchData(value: string) {
-    const response = await fetch(`https://api.github.com/users/${value}`);
-    const data = await response.json();
-
-    setUser(data);
+    try {
+      const response = await fetch(`https://api.github.com/users/${value}`);
+      const data = await response.json();
+      setUser(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function submit(e: React.ChangeEvent<HTMLFormElement>): void {
@@ -25,7 +29,7 @@ const App: React.FC = () => {
     if (inputValue) {
       fetchData(inputValue);
     } else {
-      alert("Por favor, insira um usuário...");
+      alert("Por favor, insira um usuário válido...");
     }
     setInputValue("");
   }
@@ -64,6 +68,7 @@ const App: React.FC = () => {
                 border: "2px dashed black"
               }}
             />
+
             <div
               style={{
                 display: "flex",
@@ -72,6 +77,9 @@ const App: React.FC = () => {
                 padding: "0 10px"
               }}
             >
+              <small>
+                <i>{user?.login}</i>
+              </small>
               <p>{user?.bio}</p>
               <small>
                 {user.location
