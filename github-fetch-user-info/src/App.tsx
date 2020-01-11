@@ -27,6 +27,7 @@ const App: React.FC = () => {
     } else {
       alert("Por favor, insira um usuário...");
     }
+    setInputValue("");
   }
 
   return (
@@ -50,9 +51,8 @@ const App: React.FC = () => {
           <h1>Esté é {user?.name}</h1>
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center"
+              maxWidth: "860px",
+              margin: "0 auto"
             }}
           >
             <img
@@ -69,12 +69,15 @@ const App: React.FC = () => {
                 display: "flex",
                 flexDirection: "column",
                 fontSize: "1.2rem",
-                alignItems: "flex-start",
                 padding: "0 10px"
               }}
             >
               <p>{user?.bio}</p>
-              <small>Mora em {user?.location}</small>
+              <small>
+                {user.location
+                  ? `Mora em ${user?.location}`
+                  : "Não definiu localidade"}
+              </small>
               <small>
                 Possui <strong>{user?.followers}</strong> seguidores!
               </small>
