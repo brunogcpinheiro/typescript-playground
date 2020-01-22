@@ -11,6 +11,8 @@ class MovieController {
   public async store(req: Request, res: Response): Promise<Response> {
     const movie = await Movie.create(req.body)
 
+    console.log(movie.completeInfo())
+
     return res.json(movie)
   }
 }
