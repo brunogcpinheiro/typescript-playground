@@ -2,6 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
+import routes from '../routes'
+
 class App {
   public express: express.Application
 
@@ -18,16 +20,14 @@ class App {
   }
 
   private database(): void {
-    mongoose.connect('mongodb://https://27017-cb50635d-bcec-47d8-87ce-734446998b60.ws-us02.gitpod.io/tsnode', {
+    mongoose.connect('mongodb+srv://admin:test123@learning-qdicq.mongodb.net/tsnode?retryWrites=true&w=majority', {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
   }
 
   private routes(): void {
-    this.express.get('/', (req, res) => {
-      return res.send('Hello World!')
-    })
+    this.express.use(routes)
   }
 }
 

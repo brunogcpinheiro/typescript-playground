@@ -1,5 +1,5 @@
 FROM gitpod/workspace-mongodb
-                    
+
 USER gitpod
 
 # Install custom tools, runtime, etc. using apt-get
