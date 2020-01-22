@@ -7,6 +7,12 @@ class MovieController {
 
     return res.json(movies)
   }
+
+  public async store(req: Request, res: Response): Promise<Response> {
+    const movie = await Movie.create(req.body)
+
+    return res.json(movie)
+  }
 }
 
 export default new MovieController()
